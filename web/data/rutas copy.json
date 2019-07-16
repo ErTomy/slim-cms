@@ -1,0 +1,23 @@
+{
+    "/":{
+        "template":"index.html.twig",
+        "sitemap":{
+            "priority":1,
+            "changefreq":"weekly"
+        },
+        "params":{
+            "title":"Home",
+            "description":"Esta es la descripción de la home",
+            "keywords":"a, b, c, d"
+        }
+    },
+    "/otra":{
+        "template":"otra.html.twig",
+        "params":{
+            "title":"otra",
+            "description":"otra página",
+            "keywords":"a, b, c, d"
+        },
+        "content":"aaa.html"
+    }
+}

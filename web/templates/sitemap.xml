@@ -1,0 +1,17 @@
+<?php 
+    echo '<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="xsl-stylesheets/xml-sitemap.xsl"?>';
+?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<?php
+foreach($rutas as $ruta=>$datos){            
+    if(strlen($datos->sitemap->changefreq) > 0){
+    echo '<url>
+            <loc>'.$basePath.substr($ruta, 1).'</loc>
+            <priority>'.($datos->sitemap->priority/100).'</priority>
+            <lastmod>'.date("Y-m-d", filemtime($path . DIRECTORY_SEPARATOR . $datos->template)).'</lastmod>
+            <changefreq>'.$datos->sitemap->changefreq.'</changefreq>
+        </url>';
+    }    
+}
+?>
+</urlset>
