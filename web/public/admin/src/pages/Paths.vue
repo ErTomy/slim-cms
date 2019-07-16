@@ -288,6 +288,7 @@ export default {
       }     
     },
     add:function(){
+      this.selected = null;
       this.editPage = {
         from:'',
         template:'',
@@ -320,15 +321,18 @@ export default {
     addSave:function(){
       if(this.validate(this.editPage)){
         const service = new DataServices();
-        this.paths[this.editPage.from] = this.editPage;
         var from = this.editPage.from;
-        this.$delete(this.paths[this.editPage.from], 'from');
+
+        this.paths[from] = this.editPage;
+        this.$delete(this.paths[from], 'from');
 
         if(this.editPage.contentHTML !== undefined){
           if(this.selected === null || !this.paths[this.selected].hasOwnProperty('content') || this.paths[this.selected].content.length == 0){
             var rand = function() { return Math.random().toString(36).substr(2); };
             var token = function() { return rand() + rand() + rand();  };
             this.paths[from].content = token() + '.html';          
+          }else if(this.selected != from){
+            this.$delete(this.paths, this.selected);
           }           
           service.set(this.paths[from].content, this.editPage.contentHTML).then((result)=> {
             if(result){
